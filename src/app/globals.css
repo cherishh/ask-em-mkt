@@ -1,26 +1,63 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* ── Surfaces ──────────────────────────────────────── */
+  --color-parchment: #f5f4ed;     /* page background */
+  --color-ivory: #faf9f5;         /* elevated surface */
+  --color-sand: #e8e6dc;          /* warm sand / prominent border */
+  --color-cream: #f0eee6;         /* standard light border */
+  --color-dark-surface: #30302e;  /* dark container, dark border */
+  --color-ink: #141413;           /* near-black page bg & primary text */
+
+  /* ── Text ──────────────────────────────────────────── */
+  --color-charcoal: #4d4c48;      /* primary text on warm surface */
+  --color-dark-warm: #3d3d3a;     /* emphasized secondary */
+  --color-olive: #5e5d59;         /* secondary body text */
+  --color-stone: #87867f;         /* tertiary / metadata */
+  --color-silver: #b0aea5;        /* text on dark surface */
+
+  /* ── Brand & semantic ──────────────────────────────── */
+  --color-terracotta: #c96442;    /* primary CTA / brand */
+  --color-coral: #d97757;         /* accent / link on dark */
+  --color-crimson: #b53333;       /* error */
+  --color-focus: #3898ec;         /* focus ring (only cool color) */
+
+  /* ── Ring shadow colors ────────────────────────────── */
+  --color-ring-warm: #d1cfc5;
+  --color-ring-deep: #c2c0b6;
+
+  /* ── Typography ────────────────────────────────────── */
+  --font-serif: "Anthropic Serif", Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-inter), "Anthropic Sans", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), "Anthropic Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* ── Radius scale (per DESIGN.md §5) ───────────────── */
+  --radius-sharp: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;      /* standard button / card */
+  --radius-lg: 12px;     /* primary button / input */
+  --radius-xl: 16px;     /* featured card */
+  --radius-2xl: 24px;    /* tag-like */
+  --radius-3xl: 32px;    /* hero / embedded media */
+
+  /* ── Shadows (ring-based per DESIGN.md §6) ─────────── */
+  --shadow-ring: 0 0 0 1px var(--color-ring-warm);
+  --shadow-ring-deep: 0 0 0 1px var(--color-ring-deep);
+  --shadow-whisper: 0 4px 24px rgb(0 0 0 / 0.05);
+  --shadow-inset-press: inset 0 0 0 1px rgb(0 0 0 / 0.15);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+html,
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-parchment);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  font-weight: 500;           /* serifs stay at 500 — never bold */
+  letter-spacing: normal;
 }
