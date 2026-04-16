@@ -27,8 +27,8 @@
   --color-ring-deep: #c2c0b6;
 
   /* ── Typography ────────────────────────────────────── */
-  --font-serif: "Anthropic Serif", Georgia, "Times New Roman", serif;
-  --font-sans: var(--font-inter), "Anthropic Sans", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  --font-serif: var(--font-newsreader), "Anthropic Serif", Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-instrument-sans), "Anthropic Sans", "Helvetica Neue", sans-serif;
   --font-mono: var(--font-jetbrains-mono), "Anthropic Mono", ui-monospace, "SF Mono", Menlo, monospace;
 
   /* ── Radius scale (per DESIGN.md §5) ───────────────── */
@@ -60,4 +60,775 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-serif);
   font-weight: 500;           /* serifs stay at 500 — never bold */
   letter-spacing: normal;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-terracotta) 22%, white);
+}
+
+@keyframes askemFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes askemFloat {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(0, -8px, 0);
+  }
+}
+
+@keyframes askemDrift {
+  0%,
+  100% {
+    transform: rotate(0deg) scale(1);
+  }
+
+  50% {
+    transform: rotate(5deg) scale(1.03);
+  }
+}
+
+.askem-page {
+  position: relative;
+  overflow-x: clip;
+}
+
+.askem-shell {
+  width: min(1200px, calc(100% - 32px));
+  margin: 0 auto;
+}
+
+.askem-site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  backdrop-filter: blur(18px);
+  background: color-mix(in srgb, var(--color-parchment) 88%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--color-cream) 92%, transparent);
+}
+
+.askem-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  min-height: 76px;
+}
+
+.askem-wordmark {
+  font-family: var(--font-serif);
+  font-size: 1.75rem;
+  line-height: 1;
+}
+
+.askem-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  color: var(--color-olive);
+  font-size: 0.95rem;
+}
+
+.askem-nav-links a {
+  transition: color 160ms ease;
+}
+
+.askem-nav-links a:hover {
+  color: var(--color-ink);
+}
+
+.askem-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 0 18px;
+  border-radius: var(--radius-lg);
+  transition:
+    transform 180ms ease,
+    background-color 180ms ease,
+    color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.askem-button:hover {
+  transform: translateY(-1px);
+}
+
+.askem-button-primary {
+  background: var(--color-terracotta);
+  color: var(--color-ivory);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-terracotta) 84%, black);
+}
+
+.askem-button-secondary {
+  background: var(--color-sand);
+  color: var(--color-charcoal);
+  box-shadow: var(--shadow-ring);
+}
+
+.askem-button-light {
+  background: var(--color-ivory);
+  color: var(--color-ink);
+  box-shadow: var(--shadow-ring);
+}
+
+.askem-button-dark {
+  background: var(--color-dark-surface);
+  color: var(--color-silver);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-dark-surface) 80%, black);
+}
+
+.askem-overline {
+  margin: 0 0 18px;
+  font-size: 0.72rem;
+  line-height: 1.6;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-stone);
+}
+
+.askem-overline-dark {
+  color: color-mix(in srgb, var(--color-silver) 82%, white);
+}
+
+.askem-reveal {
+  opacity: 0;
+  animation: askemFadeUp 700ms ease forwards;
+}
+
+.askem-hero {
+  position: relative;
+  padding: 48px 0 48px;
+}
+
+.askem-hero-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(380px, 0.95fr);
+  gap: 48px;
+  align-items: center;
+  min-height: calc(100svh - 110px);
+}
+
+.askem-hero-copy {
+  position: relative;
+  z-index: 1;
+  max-width: 640px;
+}
+
+.askem-hero-copy h1 {
+  margin: 0;
+  font-size: clamp(3.1rem, 7vw, 5.4rem);
+  line-height: 1.02;
+  text-wrap: balance;
+}
+
+.askem-hero-body {
+  margin: 24px 0 0;
+  max-width: 560px;
+  font-size: 1.22rem;
+  line-height: 1.65;
+  color: var(--color-olive);
+}
+
+.askem-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 28px;
+}
+
+.askem-hero-meta {
+  margin-top: 18px;
+  color: var(--color-stone);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.askem-hero-glow {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(30px);
+  pointer-events: none;
+}
+
+.askem-hero-glow-left {
+  top: 88px;
+  left: -80px;
+  width: 260px;
+  height: 260px;
+  background: color-mix(in srgb, var(--color-terracotta) 18%, transparent);
+}
+
+.askem-hero-glow-right {
+  right: -90px;
+  bottom: 140px;
+  width: 300px;
+  height: 300px;
+  background: color-mix(in srgb, #aab58e 18%, transparent);
+}
+
+.askem-editorial-collage {
+  position: relative;
+  min-height: 560px;
+  animation-delay: 150ms;
+}
+
+.askem-collage-card {
+  position: absolute;
+  background: linear-gradient(180deg, var(--color-ivory), color-mix(in srgb, var(--color-ivory) 82%, var(--color-sand)));
+  border-radius: 28px;
+  border: 1px solid var(--color-cream);
+  box-shadow: var(--shadow-whisper);
+}
+
+.askem-collage-card-main {
+  inset: 70px 56px 72px 16px;
+  padding: 28px;
+  transform: rotate(-4deg);
+}
+
+.askem-collage-card-note {
+  right: 18px;
+  bottom: 38px;
+  width: 210px;
+  padding: 22px 20px;
+  transform: rotate(6deg);
+  background: color-mix(in srgb, white 55%, var(--color-sand));
+  animation: askemFloat 5.4s ease-in-out infinite;
+}
+
+.askem-card-tag {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: var(--color-sand);
+  color: var(--color-charcoal);
+  box-shadow: var(--shadow-ring);
+  font-size: 0.8rem;
+}
+
+.askem-card-title {
+  margin: 18px 0 22px;
+  max-width: 12ch;
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  line-height: 1.08;
+  color: var(--color-ink);
+}
+
+.askem-thread {
+  display: grid;
+  gap: 12px;
+}
+
+.askem-thread-line {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 14px;
+  padding: 14px 0;
+  border-top: 1px solid var(--color-cream);
+}
+
+.askem-thread-provider {
+  color: var(--color-ink);
+  font-size: 0.92rem;
+}
+
+.askem-thread-copy {
+  color: var(--color-olive);
+  line-height: 1.55;
+}
+
+.askem-collage-card-note p {
+  margin: 14px 0 0;
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  line-height: 1.18;
+}
+
+.askem-orbit {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 14px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--color-parchment) 72%, white);
+  color: var(--color-dark-warm);
+  box-shadow: var(--shadow-ring);
+  animation: askemFloat 4.8s ease-in-out infinite;
+}
+
+.askem-orbit-one {
+  top: 18px;
+  left: 36px;
+}
+
+.askem-orbit-two {
+  top: 118px;
+  right: 8px;
+  animation-delay: 0.9s;
+}
+
+.askem-orbit-three {
+  left: 4px;
+  bottom: 94px;
+  animation-delay: 1.6s;
+}
+
+.askem-ticker {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  padding-top: 24px;
+  animation-delay: 220ms;
+}
+
+.askem-ticker p {
+  margin: 0;
+  min-height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 18px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--color-ivory) 85%, white);
+  box-shadow: var(--shadow-ring);
+  color: var(--color-charcoal);
+  text-align: center;
+}
+
+.askem-dark-section {
+  background: var(--color-ink);
+  color: var(--color-ivory);
+  padding: 110px 0;
+  margin-top: 42px;
+}
+
+.askem-dark-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  gap: 36px;
+  align-items: center;
+}
+
+.askem-section-copy h2,
+.askem-section-header h2,
+.askem-editorial-quote h2,
+.askem-cta-card h2 {
+  margin: 0;
+  font-size: clamp(2.45rem, 4.8vw, 4.1rem);
+  line-height: 1.08;
+}
+
+.askem-section-copy p:last-child,
+.askem-section-header p:last-child,
+.askem-editorial-body p,
+.askem-faq-item p {
+  font-size: 1.08rem;
+  line-height: 1.75;
+}
+
+.askem-dark-section .askem-section-copy p:last-child {
+  color: var(--color-silver);
+}
+
+.askem-demo-frame {
+  animation-delay: 120ms;
+}
+
+.askem-demo-stage {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  display: grid;
+  place-items: center;
+  border-radius: 32px;
+  background:
+    radial-gradient(circle at top left, color-mix(in srgb, var(--color-coral) 18%, transparent), transparent 34%),
+    linear-gradient(180deg, color-mix(in srgb, var(--color-dark-surface) 92%, black), color-mix(in srgb, var(--color-ink) 90%, black));
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-dark-surface) 86%, black);
+  overflow: hidden;
+  text-align: center;
+  padding: 30px;
+}
+
+.askem-demo-stage::before {
+  content: "";
+  position: absolute;
+  inset: 18px;
+  border: 1px solid color-mix(in srgb, var(--color-silver) 12%, transparent);
+  border-radius: 24px;
+}
+
+.askem-demo-label {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 12px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--color-dark-surface) 85%, black);
+  color: var(--color-silver);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-dark-surface) 65%, black);
+}
+
+.askem-demo-stage p {
+  position: relative;
+  z-index: 1;
+  margin: 16px 0 0;
+  max-width: 24ch;
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  line-height: 1.12;
+  text-wrap: balance;
+}
+
+.askem-demo-sub {
+  font-family: var(--font-sans) !important;
+  font-size: 1rem !important;
+  line-height: 1.65 !important;
+  color: var(--color-silver);
+}
+
+.askem-benefits,
+.askem-screenshots,
+.askem-faq,
+.askem-cta {
+  padding: 110px 0;
+}
+
+.askem-section-header {
+  max-width: 760px;
+}
+
+.askem-section-header p:last-child {
+  color: var(--color-olive);
+  margin-top: 20px;
+}
+
+.askem-benefit-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 42px;
+}
+
+.askem-benefit-card,
+.askem-shot-card,
+.askem-faq-item {
+  background: color-mix(in srgb, var(--color-ivory) 88%, white);
+  border: 1px solid var(--color-cream);
+  box-shadow: var(--shadow-whisper);
+}
+
+.askem-benefit-card {
+  padding: 28px;
+  border-radius: 22px;
+}
+
+.askem-benefit-index,
+.askem-shot-label {
+  display: inline-block;
+  color: var(--color-stone);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+}
+
+.askem-benefit-card h3,
+.askem-shot-card h3,
+.askem-faq-item h3 {
+  margin: 14px 0 12px;
+  font-size: 1.9rem;
+  line-height: 1.12;
+}
+
+.askem-benefit-card p,
+.askem-shot-card p,
+.askem-faq-item p {
+  margin: 0;
+  color: var(--color-olive);
+  line-height: 1.7;
+}
+
+.askem-editorial-band {
+  position: relative;
+  padding: 96px 0;
+}
+
+.askem-editorial-band::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--color-sand) 56%, transparent), transparent 58%),
+    radial-gradient(circle at 12% 18%, color-mix(in srgb, var(--color-terracotta) 10%, transparent), transparent 30%);
+  pointer-events: none;
+}
+
+.askem-editorial-band-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 40px;
+  align-items: start;
+}
+
+.askem-editorial-body {
+  max-width: 700px;
+}
+
+.askem-editorial-body p {
+  margin: 0 0 18px;
+  color: var(--color-charcoal);
+}
+
+.askem-shot-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 42px;
+}
+
+.askem-shot-card {
+  padding: 22px;
+  border-radius: 24px;
+}
+
+.askem-shot-visual {
+  position: relative;
+  min-height: 260px;
+  margin-bottom: 18px;
+  border-radius: 22px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at top left, color-mix(in srgb, var(--color-coral) 16%, transparent), transparent 36%),
+    linear-gradient(180deg, color-mix(in srgb, var(--color-dark-surface) 75%, black), color-mix(in srgb, var(--color-ink) 90%, black));
+}
+
+.askem-shot-visual::after {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  border-radius: 16px;
+  border: 1px solid color-mix(in srgb, var(--color-silver) 14%, transparent);
+}
+
+.askem-shot-window {
+  display: flex;
+  gap: 8px;
+  padding: 18px;
+}
+
+.askem-shot-window span {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--color-silver) 82%, var(--color-dark-surface));
+}
+
+.askem-shot-lines {
+  display: grid;
+  gap: 14px;
+  padding: 16px 22px 24px;
+}
+
+.askem-shot-lines span {
+  display: block;
+  height: 14px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--color-silver) 18%, transparent);
+}
+
+.askem-shot-lines span:nth-child(1) { width: 68%; }
+.askem-shot-lines span:nth-child(2) { width: 86%; }
+.askem-shot-lines span:nth-child(3) { width: 58%; }
+.askem-shot-lines span:nth-child(4) { width: 74%; }
+
+.askem-faq-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: 34px;
+}
+
+.askem-faq-list {
+  display: grid;
+  gap: 16px;
+}
+
+.askem-faq-item {
+  border-radius: 22px;
+  padding: 24px 24px 26px;
+}
+
+.askem-cta {
+  padding-top: 24px;
+}
+
+.askem-cta-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 28px;
+  align-items: center;
+  padding: 36px;
+  border-radius: 32px;
+  background: linear-gradient(135deg, var(--color-ink), color-mix(in srgb, var(--color-dark-surface) 88%, black));
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-dark-surface) 84%, black);
+  color: var(--color-ivory);
+}
+
+.askem-cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: flex-end;
+}
+
+.askem-footer {
+  padding: 34px 0 48px;
+}
+
+.askem-footer-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  color: var(--color-stone);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 980px) {
+  .askem-nav-links {
+    display: none;
+  }
+
+  .askem-hero-grid,
+  .askem-dark-grid,
+  .askem-editorial-band-grid,
+  .askem-faq-grid,
+  .askem-cta-card {
+    grid-template-columns: 1fr;
+  }
+
+  .askem-benefit-grid,
+  .askem-shot-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .askem-hero {
+    padding-top: 24px;
+  }
+
+  .askem-hero-grid {
+    min-height: auto;
+    gap: 28px;
+  }
+
+  .askem-editorial-collage {
+    min-height: 430px;
+  }
+
+  .askem-collage-card-note {
+    right: 8px;
+    bottom: 14px;
+  }
+
+  .askem-ticker {
+    grid-template-columns: 1fr;
+  }
+
+  .askem-cta-actions {
+    justify-content: flex-start;
+  }
+
+  .askem-footer-row {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 640px) {
+  .askem-shell {
+    width: min(100% - 24px, 1200px);
+  }
+
+  .askem-nav {
+    min-height: 68px;
+  }
+
+  .askem-wordmark {
+    font-size: 1.5rem;
+  }
+
+  .askem-button {
+    min-height: 44px;
+    width: 100%;
+  }
+
+  .askem-site-header .askem-button {
+    width: auto;
+  }
+
+  .askem-hero-body,
+  .askem-section-copy p:last-child,
+  .askem-section-header p:last-child,
+  .askem-editorial-body p,
+  .askem-faq-item p {
+    font-size: 1rem;
+  }
+
+  .askem-card-title,
+  .askem-demo-stage p,
+  .askem-benefit-card h3,
+  .askem-shot-card h3,
+  .askem-faq-item h3 {
+    font-size: 1.55rem;
+  }
+
+  .askem-benefits,
+  .askem-screenshots,
+  .askem-faq {
+    padding: 84px 0;
+  }
+
+  .askem-dark-section {
+    padding: 88px 0;
+  }
+
+  .askem-thread-line {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
 }
