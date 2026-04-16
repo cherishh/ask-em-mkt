@@ -47,6 +47,11 @@
   --shadow-inset-press: inset 0 0 0 1px rgb(0 0 0 / 0.15);
 }
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 64px;   /* clear the sticky header when jumping to anchors */
+}
+
 html,
 body {
   background-color: var(--color-parchment);
