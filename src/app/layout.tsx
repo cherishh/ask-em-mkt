@@ -15,9 +15,9 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ask'em — Sync prompts across AI chat providers",
+  title: "ask'em — One prompt across official AI chats",
   description:
-    "Ask every model at once. A Chrome extension that broadcasts a single prompt to Claude, ChatGPT, Gemini, DeepSeek, and Manus.",
+    "A Chrome extension that syncs one prompt across Claude, ChatGPT, Gemini, DeepSeek, and Manus while keeping you inside each provider's official chat.",
 };
 
 export default function RootLayout({
